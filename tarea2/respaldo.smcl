@@ -1,0 +1,618 @@
+{smcl}
+{com}{sf}{ul off}{txt}{.-}
+      name:  {res}<unnamed>
+       {txt}log:  {res}/Users/macbookair/Documents/Magister UC/1° Semestre 2024/Diseño y Análisis de Investigación Social/tarea2/respaldo.smcl
+  {txt}log type:  {res}smcl
+ {txt}opened on:  {res}22 May 2024, 01:08:29
+{txt}
+{com}. dir     
+
+{res}total 168
+drwxr-xr-x@ 4 macbookair  staff    128 May 19 20:45 input/
+drwxr-xr-x@ 6 macbookair  staff    192 May 22 01:06 output/
+drwxr-xr-x@ 8 macbookair  staff    256 May 22 01:06 procesamiento/
+-rw-r--r--  1 macbookair  staff    307 May 22 01:08 respaldo.smcl
+-rw-r--r--@ 1 macbookair  staff  75842 May 22 01:05 tarea02_alaffert_SOL3000.docx
+-rw-r--r--@ 1 macbookair  staff    598 May 19 20:38 tarea2.stpr
+{txt}
+{com}. 
+. /*** 1. Cargar datos ***/
+.                                                                         
+. use "output/db_proc.dta", clear
+{txt}
+{com}. 
+. count // contar casos
+  {res}1,198
+{txt}
+{com}. 
+. /*** 2. Descriptivos ***/
+. 
+. describe
+
+{txt}Contains data from {res}output/db_proc.dta
+{txt} Observations:{res}         1,198                  
+{txt}    Variables:{res}             6                  19 May 2024 21:08
+{txt}{hline}
+Variable      Storage   Display    Value
+    name         type    format    label      Variable label
+{hline}
+{p 0 48}{res}{bind:educyrs        }{txt}{bind: double  }{bind:%8.0g     }{space 1}{bind:         }{bind:  }{res}{res}{p_end}
+{p 0 48}{bind:sindicato      }{txt}{bind: double  }{bind:%9.0g     }{space 1}{bind:         }{bind:  }{res}{res}RECODE of union{p_end}
+{p 0 48}{bind:sexo           }{txt}{bind: double  }{bind:%9.0g     }{space 1}{bind:         }{bind:  }{res}{res}RECODE of sex{p_end}
+{p 0 48}{bind:ess            }{txt}{bind: double  }{bind:%9.0g     }{space 1}{bind:         }{bind:  }{res}{res}RECODE of topbot{p_end}
+{p 0 48}{bind:ideologia      }{txt}{bind: str19   }{bind:%19s      }{space 1}{bind:         }{bind:  }{res}{res}{p_end}
+{p 0 48}{bind:psci           }{txt}{bind: float   }{bind:%9.0g     }{space 1}{bind:         }{bind:  }{res}{res}{p_end}
+{txt}{hline}
+Sorted by: 
+
+{com}. 
+. codebook, compact // forma compacta
+{res}
+{txt}Variable    Obs Unique      Mean  Min  Max  Label
+{txt}{hline 127}
+{txt}educyrs  {res}  1198     23  11.02671    1   23  {txt}
+{txt}sindicato{res}  1198      2  .1419032    0    1  {txt}RECODE of union
+{txt}sexo     {res}  1198      2  .5442404    0    1  {txt}RECODE of sex
+{txt}ess      {res}  1198     10  4.077629    1   10  {txt}RECODE of topbot
+{txt}ideologia{res}  1198      4         .    .    .  {txt}
+{txt}psci     {res}  1198     13  6.185309    0   12  {txt}
+{txt}{hline 127}
+
+{com}. 
+. sum
+
+{txt}    Variable {c |}        Obs        Mean    Std. dev.       Min        Max
+{hline 13}{c +}{hline 57}
+{space 5}educyrs {c |}{res}      1,198    11.02671    4.394987          1         23
+{txt}{space 3}sindicato {c |}{res}      1,198    .1419032    .3490965          0          1
+{txt}{space 8}sexo {c |}{res}      1,198    .5442404    .4982469          0          1
+{txt}{space 9}ess {c |}{res}      1,198    4.077629    1.595153          1         10
+{txt}{space 3}ideologia {c |}{res}          0
+{txt}{hline 13}{c +}{hline 57}
+{space 8}psci {c |}{res}      1,198    6.185309    2.830326          0         12
+{txt}
+{com}. 
+. tabstat psci ess educyrs, stats (mean median sd variance min max n skew kurt) // para variables continuas
+
+{txt}   Stats {...}
+{c |}{...}
+      psci       ess   educyrs
+{hline 9}{c +}{hline 30}
+{ralign 8:Mean} {...}
+{c |}{...}
+ {res} 6.185309  4.077629  11.02671
+{txt}{ralign 8:p50} {...}
+{c |}{...}
+ {res}        6         4        12
+{txt}{ralign 8:SD} {...}
+{c |}{...}
+ {res} 2.830326  1.595153  4.394987
+{txt}{ralign 8:Variance} {...}
+{c |}{...}
+ {res} 8.010745  2.544512  19.31591
+{txt}{ralign 8:Min} {...}
+{c |}{...}
+ {res}        0         1         1
+{txt}{ralign 8:Max} {...}
+{c |}{...}
+ {res}       12        10        23
+{txt}{ralign 8:N} {...}
+{c |}{...}
+ {res}     1198      1198      1198
+{txt}{ralign 8:Skewness} {...}
+{c |}{...}
+ {res}-.1972232  .0620027 -.0862695
+{txt}{ralign 8:Kurtosis} {...}
+{c |}{...}
+ {res} 2.602206  3.149629  2.542714
+{txt}{hline 9}{c BT}{hline 30}
+
+{com}. 
+. tab sexo
+
+  {txt}RECODE of {c |}
+        sex {c |}      Freq.     Percent        Cum.
+{hline 12}{c +}{hline 35}
+          0 {c |}{res}        546       45.58       45.58
+{txt}          1 {c |}{res}        652       54.42      100.00
+{txt}{hline 12}{c +}{hline 35}
+      Total {c |}{res}      1,198      100.00
+{txt}
+{com}. tab sindicato
+
+  {txt}RECODE of {c |}
+      union {c |}      Freq.     Percent        Cum.
+{hline 12}{c +}{hline 35}
+          0 {c |}{res}      1,028       85.81       85.81
+{txt}          1 {c |}{res}        170       14.19      100.00
+{txt}{hline 12}{c +}{hline 35}
+      Total {c |}{res}      1,198      100.00
+{txt}
+{com}. tab ideologia
+
+          {txt}ideologia {c |}      Freq.     Percent        Cum.
+{hline 20}{c +}{hline 35}
+             Centro {c |}{res}        214       17.86       17.86
+{txt}            Derecha {c |}{res}        187       15.61       33.47
+{txt}          Izquierda {c |}{res}        143       11.94       45.41
+{txt} Sin identificación {c |}{res}        654       54.59      100.00
+{txt}{hline 20}{c +}{hline 35}
+              Total {c |}{res}      1,198      100.00
+{txt}
+{com}. 
+. * encode la variable ideologia
+. encode ideologia, generate(ideologia_rec)
+{txt}
+{com}. tab ideologia_rec
+
+     {txt}ideologia_rec {c |}      Freq.     Percent        Cum.
+{hline 19}{c +}{hline 35}
+            Centro {c |}{res}        214       17.86       17.86
+{txt}           Derecha {c |}{res}        187       15.61       33.47
+{txt}         Izquierda {c |}{res}        143       11.94       45.41
+{txt}Sin identificación {c |}{res}        654       54.59      100.00
+{txt}{hline 19}{c +}{hline 35}
+             Total {c |}{res}      1,198      100.00
+{txt}
+{com}. 
+. /*** 3. Analisis ***/
+. 
+. // Regresion lineal bivariada //
+. 
+. regress psci ess, beta
+
+{txt}      Source {c |}       SS           df       MS      Number of obs   ={res}     1,198
+{txt}{hline 13}{c +}{hline 34}   F(1, 1196)      = {res}     8.47
+{txt}       Model {c |} {res} 67.4443906         1  67.4443906   {txt}Prob > F        ={res}    0.0037
+{txt}    Residual {c |} {res} 9521.41705     1,196  7.96105104   {txt}R-squared       ={res}    0.0070
+{txt}{hline 13}{c +}{hline 34}   Adj R-squared   ={res}    0.0062
+{txt}       Total {c |} {res} 9588.86144     1,197  8.01074472   {txt}Root MSE        =   {res} 2.8215
+
+{txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 1}        psci{col 14}{c |} Coefficient{col 26}  Std. err.{col 38}      t{col 46}   P>|t|{col 67}        Beta
+{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 9}ess {c |}{col 14}{res}{space 2}-.1488071{col 26}{space 2} .0511253{col 37}{space 1}   -2.91{col 46}{space 3}0.004{col 67}{space 3}-.0838667
+{txt}{space 7}_cons {c |}{col 14}{res}{space 2} 6.792089{col 26}{space 2} .2238416{col 37}{space 1}   30.34{col 46}{space 3}0.000{col 67}{space 3}        .
+{txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}{txt}
+{com}. 
+. listcoef
+
+{txt}regress (N={res}1198{txt}): Unstandardized and Standardized Estimates 
+
+ Observed SD: {res}2.8303259
+{txt} SD of Error: {res}2.8215335
+
+{txt}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c TT}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}
+        psci {c |}      b         t     P>|t|    bStdX    bStdY   bStdXY      SDofX
+{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c +}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}
+         ess{col 14}{c |}{res}  -0.14881   -2.911   0.004  -0.2374  -0.0526  -0.0839     1.5952
+{txt}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c BT}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}
+
+{com}. 
+. correlate psci ess
+{txt}(obs=1,198)
+
+             {c |}     psci      ess
+{hline 13}{c +}{hline 18}
+        psci {c |}{res}   1.0000
+         {txt}ess {c |}{res}  -0.0839   1.0000
+
+{txt}
+{com}. 
+. dis 0.0839^2
+{res}.00703921
+{txt}
+{com}. 
+. predict predm0_psci
+{txt}(option {bf:xb} assumed; fitted values)
+
+{com}. list in 1/6
+{txt}
+     {c TLC}{hline 9}{c -}{hline 10}{c -}{hline 6}{c -}{hline 5}{c -}{hline 20}{c -}{hline 6}{c -}{hline 20}{c -}{hline 10}{c TRC}
+     {c |} {res}educyrs   sindic~o   sexo   ess            ideologia   psci        ideologia_rec   predm0~i {txt}{c |}
+     {c LT}{hline 9}{c -}{hline 10}{c -}{hline 6}{c -}{hline 5}{c -}{hline 20}{c -}{hline 6}{c -}{hline 20}{c -}{hline 10}{c RT}
+  1. {c |} {res}     12          0      0     5              Derecha      8              Derecha   6.048054 {txt}{c |}
+  2. {c |} {res}     13          0      0     5   Sin identificación      3   Sin identificación   6.048054 {txt}{c |}
+  3. {c |} {res}      7          0      0     5            Izquierda     11            Izquierda   6.048054 {txt}{c |}
+  4. {c |} {res}      6          0      1     6               Centro      7               Centro   5.899247 {txt}{c |}
+  5. {c |} {res}     13          0      1     6               Centro      9               Centro   5.899247 {txt}{c |}
+     {c LT}{hline 9}{c -}{hline 10}{c -}{hline 6}{c -}{hline 5}{c -}{hline 20}{c -}{hline 6}{c -}{hline 20}{c -}{hline 10}{c RT}
+  6. {c |} {res}     13          0      0     4               Centro      4               Centro   6.196861 {txt}{c |}
+     {c BLC}{hline 9}{c -}{hline 10}{c -}{hline 6}{c -}{hline 5}{c -}{hline 20}{c -}{hline 6}{c -}{hline 20}{c -}{hline 10}{c BRC}
+
+{com}. 
+. predict residuom0, residuals 
+{txt}
+{com}. list in 1/6
+{txt}
+     {c TLC}{hline 9}{c -}{hline 10}{c -}{hline 6}{c -}{hline 5}{c -}{hline 20}{c -}{hline 6}{c -}{hline 20}{c -}{hline 10}{c -}{hline 11}{c TRC}
+     {c |} {res}educyrs   sindic~o   sexo   ess            ideologia   psci        ideologia_rec   predm0~i   residuom0 {txt}{c |}
+     {c LT}{hline 9}{c -}{hline 10}{c -}{hline 6}{c -}{hline 5}{c -}{hline 20}{c -}{hline 6}{c -}{hline 20}{c -}{hline 10}{c -}{hline 11}{c RT}
+  1. {c |} {res}     12          0      0     5              Derecha      8              Derecha   6.048054    1.951946 {txt}{c |}
+  2. {c |} {res}     13          0      0     5   Sin identificación      3   Sin identificación   6.048054   -3.048054 {txt}{c |}
+  3. {c |} {res}      7          0      0     5            Izquierda     11            Izquierda   6.048054    4.951946 {txt}{c |}
+  4. {c |} {res}      6          0      1     6               Centro      7               Centro   5.899247    1.100754 {txt}{c |}
+  5. {c |} {res}     13          0      1     6               Centro      9               Centro   5.899247    3.100754 {txt}{c |}
+     {c LT}{hline 9}{c -}{hline 10}{c -}{hline 6}{c -}{hline 5}{c -}{hline 20}{c -}{hline 6}{c -}{hline 20}{c -}{hline 10}{c -}{hline 11}{c RT}
+  6. {c |} {res}     13          0      0     4               Centro      4               Centro   6.196861   -2.196861 {txt}{c |}
+     {c BLC}{hline 9}{c -}{hline 10}{c -}{hline 6}{c -}{hline 5}{c -}{hline 20}{c -}{hline 6}{c -}{hline 20}{c -}{hline 10}{c -}{hline 11}{c BRC}
+
+{com}. 
+. margins, at(ess=(1/10))
+{res}
+{txt}{col 1}Adjusted predictions{col 58}{lalign 13:Number of obs}{col 71} = {res}{ralign 5:1,198}
+{txt}{col 1}Model VCE: {res:OLS}
+
+{txt}{p2colset 1 13 13 2}{...}
+{p2col:Expression:}{res:Linear prediction, predict()}{p_end}
+{p2colreset}{...}
+{lalign 8:1._at: }{space 0}{lalign 3:ess} = {res:{ralign 2:1}}
+{lalign 8:2._at: }{space 0}{lalign 3:ess} = {res:{ralign 2:2}}
+{lalign 8:3._at: }{space 0}{lalign 3:ess} = {res:{ralign 2:3}}
+{lalign 8:4._at: }{space 0}{lalign 3:ess} = {res:{ralign 2:4}}
+{lalign 8:5._at: }{space 0}{lalign 3:ess} = {res:{ralign 2:5}}
+{lalign 8:6._at: }{space 0}{lalign 3:ess} = {res:{ralign 2:6}}
+{lalign 8:7._at: }{space 0}{lalign 3:ess} = {res:{ralign 2:7}}
+{lalign 8:8._at: }{space 0}{lalign 3:ess} = {res:{ralign 2:8}}
+{lalign 8:9._at: }{space 0}{lalign 3:ess} = {res:{ralign 2:9}}
+{lalign 8:10._at: }{space 0}{lalign 3:ess} = {res:{ralign 2:10}}
+
+{res}{txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 14}{c |}{col 26} Delta-method
+{col 14}{c |}     Margin{col 26}   std. err.{col 38}      t{col 46}   P>|t|{col 54}     [95% con{col 67}f. interval]
+{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 9}_at {c |}
+{space 10}1  {c |}{col 14}{res}{space 2} 6.643282{col 26}{space 2} .1772079{col 37}{space 1}   37.49{col 46}{space 3}0.000{col 54}{space 4} 6.295609{col 67}{space 3} 6.990955
+{txt}{space 10}2  {c |}{col 14}{res}{space 2} 6.494475{col 26}{space 2} .1338949{col 37}{space 1}   48.50{col 46}{space 3}0.000{col 54}{space 4}  6.23178{col 67}{space 3}  6.75717
+{txt}{space 10}3  {c |}{col 14}{res}{space 2} 6.345668{col 26}{space 2} .0983903{col 37}{space 1}   64.49{col 46}{space 3}0.000{col 54}{space 4} 6.152631{col 67}{space 3} 6.538705
+{txt}{space 10}4  {c |}{col 14}{res}{space 2} 6.196861{col 26}{space 2} .0816152{col 37}{space 1}   75.93{col 46}{space 3}0.000{col 54}{space 4} 6.036736{col 67}{space 3} 6.356985
+{txt}{space 10}5  {c |}{col 14}{res}{space 2} 6.048054{col 26}{space 2} .0941755{col 37}{space 1}   64.22{col 46}{space 3}0.000{col 54}{space 4} 5.863286{col 67}{space 3} 6.232821
+{txt}{space 10}6  {c |}{col 14}{res}{space 2} 5.899246{col 26}{space 2} .1276894{col 37}{space 1}   46.20{col 46}{space 3}0.000{col 54}{space 4} 5.648726{col 67}{space 3} 6.149767
+{txt}{space 10}7  {c |}{col 14}{res}{space 2} 5.750439{col 26}{space 2} .1701992{col 37}{space 1}   33.79{col 46}{space 3}0.000{col 54}{space 4} 5.416517{col 67}{space 3} 6.084362
+{txt}{space 10}8  {c |}{col 14}{res}{space 2} 5.601632{col 26}{space 2} .2164683{col 37}{space 1}   25.88{col 46}{space 3}0.000{col 54}{space 4} 5.176932{col 67}{space 3} 6.026332
+{txt}{space 10}9  {c |}{col 14}{res}{space 2} 5.452825{col 26}{space 2} .2645314{col 37}{space 1}   20.61{col 46}{space 3}0.000{col 54}{space 4} 4.933828{col 67}{space 3} 5.971823
+{txt}{space 9}10  {c |}{col 14}{res}{space 2} 5.304018{col 26}{space 2} .3135647{col 37}{space 1}   16.92{col 46}{space 3}0.000{col 54}{space 4}  4.68882{col 67}{space 3} 5.919216
+{txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}{txt}
+{com}. 
+. quietly regress psci ess, beta
+{txt}
+{com}. outreg2 using output/modelos_tarea2.xls, replace ctitle(Model 0) alpha(0.001, 0.01, 0.05)
+{txt}{browse `"output/modelos_tarea2.xls"'}
+{browse `"/Users/macbookair/Documents/Magister UC/1° Semestre 2024/Diseño y Análisis de Investigación Social/tarea2"' :dir}{com} : {txt}{stata `"seeout using "output/modelos_tarea2.txt""':seeout}
+
+{com}. 
+. // Regresion lineal multiple //
+. 
+. regress psci ess sindicato, beta
+
+{txt}      Source {c |}       SS           df       MS      Number of obs   ={res}     1,198
+{txt}{hline 13}{c +}{hline 34}   F(2, 1195)      = {res}     4.71
+{txt}       Model {c |} {res} 74.9370716         2  37.4685358   {txt}Prob > F        ={res}    0.0092
+{txt}    Residual {c |} {res} 9513.92436     1,195  7.96144298   {txt}R-squared       ={res}    0.0078
+{txt}{hline 13}{c +}{hline 34}   Adj R-squared   ={res}    0.0062
+{txt}       Total {c |} {res} 9588.86144     1,197  8.01074472   {txt}Root MSE        =   {res} 2.8216
+
+{txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 1}        psci{col 14}{c |} Coefficient{col 26}  Std. err.{col 38}      t{col 46}   P>|t|{col 67}        Beta
+{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 9}ess {c |}{col 14}{res}{space 2}-.1505794{col 26}{space 2} .0511592{col 37}{space 1}   -2.94{col 46}{space 3}0.003{col 67}{space 3}-.0848655
+{txt}{space 3}sindicato {c |}{col 14}{res}{space 2} .2267791{col 26}{space 2} .2337655{col 37}{space 1}    0.97{col 46}{space 3}0.332{col 67}{space 3} .0279713
+{txt}{space 7}_cons {c |}{col 14}{res}{space 2} 6.767135{col 26}{space 2} .2253201{col 37}{space 1}   30.03{col 46}{space 3}0.000{col 67}{space 3}        .
+{txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}{txt}
+{com}. 
+. listcoef
+
+{txt}regress (N={res}1198{txt}): Unstandardized and Standardized Estimates 
+
+ Observed SD: {res}2.8303259
+{txt} SD of Error: {res}2.8216029
+
+{txt}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c TT}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}
+        psci {c |}      b         t     P>|t|    bStdX    bStdY   bStdXY      SDofX
+{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c +}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}
+         ess{col 14}{c |}{res}  -0.15058   -2.943   0.003  -0.2402  -0.0532  -0.0849     1.5952
+   {txt}sindicato{col 14}{c |}{res}   0.22678    0.970   0.332   0.0792   0.0801   0.0280     0.3491
+{txt}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c BT}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}
+
+{com}. 
+. predict predm1_psci
+{txt}(option {bf:xb} assumed; fitted values)
+
+{com}. list in 1/6
+{txt}
+     {c TLC}{hline 9}{c -}{hline 10}{c -}{hline 6}{c -}{hline 5}{c -}{hline 20}{c -}{hline 6}{c -}{hline 20}{c -}{hline 10}{c -}{hline 11}{c -}{hline 10}{c TRC}
+     {c |} {res}educyrs   sindic~o   sexo   ess            ideologia   psci        ideologia_rec   predm0~i   residuom0   predm1~i {txt}{c |}
+     {c LT}{hline 9}{c -}{hline 10}{c -}{hline 6}{c -}{hline 5}{c -}{hline 20}{c -}{hline 6}{c -}{hline 20}{c -}{hline 10}{c -}{hline 11}{c -}{hline 10}{c RT}
+  1. {c |} {res}     12          0      0     5              Derecha      8              Derecha   6.048054    1.951946   6.014238 {txt}{c |}
+  2. {c |} {res}     13          0      0     5   Sin identificación      3   Sin identificación   6.048054   -3.048054   6.014238 {txt}{c |}
+  3. {c |} {res}      7          0      0     5            Izquierda     11            Izquierda   6.048054    4.951946   6.014238 {txt}{c |}
+  4. {c |} {res}      6          0      1     6               Centro      7               Centro   5.899247    1.100754   5.863659 {txt}{c |}
+  5. {c |} {res}     13          0      1     6               Centro      9               Centro   5.899247    3.100754   5.863659 {txt}{c |}
+     {c LT}{hline 9}{c -}{hline 10}{c -}{hline 6}{c -}{hline 5}{c -}{hline 20}{c -}{hline 6}{c -}{hline 20}{c -}{hline 10}{c -}{hline 11}{c -}{hline 10}{c RT}
+  6. {c |} {res}     13          0      0     4               Centro      4               Centro   6.196861   -2.196861   6.164817 {txt}{c |}
+     {c BLC}{hline 9}{c -}{hline 10}{c -}{hline 6}{c -}{hline 5}{c -}{hline 20}{c -}{hline 6}{c -}{hline 20}{c -}{hline 10}{c -}{hline 11}{c -}{hline 10}{c BRC}
+
+{com}. 
+. predict residuom1, residuals 
+{txt}
+{com}. list in 1/6
+
+     {txt}{c TLC}{hline 9}{c TT}{hline 10}{c TT}{hline 6}{c TT}{hline 5}{c TT}{hline 20}{c TT}{hline 6}{c TT}{hline 20}{c TT}{hline 10}{c TT}{hline 11}{c TT}{hline 10}{c TRC}
+  1. {c |} educyrs {c |} sindic~o {c |} sexo {c |} ess {c |}          ideologia {c |} psci {c |}      ideologia_rec {c |} predm0~i {c |} residuom0 {c |} predm1~i {c |}
+     {c |} {res}     12 {txt}{c |} {res}       0 {txt}{c |} {res}   0 {txt}{c |} {res}  5 {txt}{c |} {res}           Derecha {txt}{c |} {res}   8 {txt}{c |} {res}           Derecha {txt}{c |} {res}6.048054 {txt}{c |} {res} 1.951946 {txt}{c |} {res}6.014238 {txt}{c |}
+     {c LT}{hline 9}{c BT}{hline 10}{c BT}{hline 6}{c BT}{hline 5}{c BT}{hline 20}{c BT}{hline 6}{c BT}{hline 20}{c BT}{hline 10}{c BT}{hline 11}{c BT}{hline 10}{c RT}
+     {c |}                                                     residuom1                                                      {c |}
+     {c |}                                                     {res} 1.985762                                                      {txt}{c |}
+     {c BLC}{hline 116}{c BRC}
+
+     {c TLC}{hline 9}{c TT}{hline 10}{c TT}{hline 6}{c TT}{hline 5}{c TT}{hline 20}{c TT}{hline 6}{c TT}{hline 20}{c TT}{hline 10}{c TT}{hline 11}{c TT}{hline 10}{c TRC}
+  2. {c |} educyrs {c |} sindic~o {c |} sexo {c |} ess {c |}          ideologia {c |} psci {c |}      ideologia_rec {c |} predm0~i {c |} residuom0 {c |} predm1~i {c |}
+     {c |} {res}     13 {txt}{c |} {res}       0 {txt}{c |} {res}   0 {txt}{c |} {res}  5 {txt}{c |} {res}Sin identificación {txt}{c |} {res}   3 {txt}{c |} {res}Sin identificación {txt}{c |} {res}6.048054 {txt}{c |} {res}-3.048054 {txt}{c |} {res}6.014238 {txt}{c |}
+     {c LT}{hline 9}{c BT}{hline 10}{c BT}{hline 6}{c BT}{hline 5}{c BT}{hline 20}{c BT}{hline 6}{c BT}{hline 20}{c BT}{hline 10}{c BT}{hline 11}{c BT}{hline 10}{c RT}
+     {c |}                                                     residuom1                                                      {c |}
+     {c |}                                                     {res}-3.014238                                                      {txt}{c |}
+     {c BLC}{hline 116}{c BRC}
+
+     {c TLC}{hline 9}{c TT}{hline 10}{c TT}{hline 6}{c TT}{hline 5}{c TT}{hline 20}{c TT}{hline 6}{c TT}{hline 20}{c TT}{hline 10}{c TT}{hline 11}{c TT}{hline 10}{c TRC}
+  3. {c |} educyrs {c |} sindic~o {c |} sexo {c |} ess {c |}          ideologia {c |} psci {c |}      ideologia_rec {c |} predm0~i {c |} residuom0 {c |} predm1~i {c |}
+     {c |} {res}      7 {txt}{c |} {res}       0 {txt}{c |} {res}   0 {txt}{c |} {res}  5 {txt}{c |} {res}         Izquierda {txt}{c |} {res}  11 {txt}{c |} {res}         Izquierda {txt}{c |} {res}6.048054 {txt}{c |} {res} 4.951946 {txt}{c |} {res}6.014238 {txt}{c |}
+     {c LT}{hline 9}{c BT}{hline 10}{c BT}{hline 6}{c BT}{hline 5}{c BT}{hline 20}{c BT}{hline 6}{c BT}{hline 20}{c BT}{hline 10}{c BT}{hline 11}{c BT}{hline 10}{c RT}
+     {c |}                                                     residuom1                                                      {c |}
+     {c |}                                                     {res} 4.985762                                                      {txt}{c |}
+     {c BLC}{hline 116}{c BRC}
+
+     {c TLC}{hline 9}{c TT}{hline 10}{c TT}{hline 6}{c TT}{hline 5}{c TT}{hline 20}{c TT}{hline 6}{c TT}{hline 20}{c TT}{hline 10}{c TT}{hline 11}{c TT}{hline 10}{c TRC}
+  4. {c |} educyrs {c |} sindic~o {c |} sexo {c |} ess {c |}          ideologia {c |} psci {c |}      ideologia_rec {c |} predm0~i {c |} residuom0 {c |} predm1~i {c |}
+     {c |} {res}      6 {txt}{c |} {res}       0 {txt}{c |} {res}   1 {txt}{c |} {res}  6 {txt}{c |} {res}            Centro {txt}{c |} {res}   7 {txt}{c |} {res}            Centro {txt}{c |} {res}5.899247 {txt}{c |} {res} 1.100754 {txt}{c |} {res}5.863659 {txt}{c |}
+     {c LT}{hline 9}{c BT}{hline 10}{c BT}{hline 6}{c BT}{hline 5}{c BT}{hline 20}{c BT}{hline 6}{c BT}{hline 20}{c BT}{hline 10}{c BT}{hline 11}{c BT}{hline 10}{c RT}
+     {c |}                                                     residuom1                                                      {c |}
+     {c |}                                                     {res} 1.136341                                                      {txt}{c |}
+     {c BLC}{hline 116}{c BRC}
+
+     {c TLC}{hline 9}{c TT}{hline 10}{c TT}{hline 6}{c TT}{hline 5}{c TT}{hline 20}{c TT}{hline 6}{c TT}{hline 20}{c TT}{hline 10}{c TT}{hline 11}{c TT}{hline 10}{c TRC}
+  5. {c |} educyrs {c |} sindic~o {c |} sexo {c |} ess {c |}          ideologia {c |} psci {c |}      ideologia_rec {c |} predm0~i {c |} residuom0 {c |} predm1~i {c |}
+     {c |} {res}     13 {txt}{c |} {res}       0 {txt}{c |} {res}   1 {txt}{c |} {res}  6 {txt}{c |} {res}            Centro {txt}{c |} {res}   9 {txt}{c |} {res}            Centro {txt}{c |} {res}5.899247 {txt}{c |} {res} 3.100754 {txt}{c |} {res}5.863659 {txt}{c |}
+     {c LT}{hline 9}{c BT}{hline 10}{c BT}{hline 6}{c BT}{hline 5}{c BT}{hline 20}{c BT}{hline 6}{c BT}{hline 20}{c BT}{hline 10}{c BT}{hline 11}{c BT}{hline 10}{c RT}
+     {c |}                                                     residuom1                                                      {c |}
+     {c |}                                                     {res} 3.136341                                                      {txt}{c |}
+     {c BLC}{hline 116}{c BRC}
+
+     {c TLC}{hline 9}{c TT}{hline 10}{c TT}{hline 6}{c TT}{hline 5}{c TT}{hline 20}{c TT}{hline 6}{c TT}{hline 20}{c TT}{hline 10}{c TT}{hline 11}{c TT}{hline 10}{c TRC}
+  6. {c |} educyrs {c |} sindic~o {c |} sexo {c |} ess {c |}          ideologia {c |} psci {c |}      ideologia_rec {c |} predm0~i {c |} residuom0 {c |} predm1~i {c |}
+     {c |} {res}     13 {txt}{c |} {res}       0 {txt}{c |} {res}   0 {txt}{c |} {res}  4 {txt}{c |} {res}            Centro {txt}{c |} {res}   4 {txt}{c |} {res}            Centro {txt}{c |} {res}6.196861 {txt}{c |} {res}-2.196861 {txt}{c |} {res}6.164817 {txt}{c |}
+     {c LT}{hline 9}{c BT}{hline 10}{c BT}{hline 6}{c BT}{hline 5}{c BT}{hline 20}{c BT}{hline 6}{c BT}{hline 20}{c BT}{hline 10}{c BT}{hline 11}{c BT}{hline 10}{c RT}
+     {c |}                                                     residuom1                                                      {c |}
+     {c |}                                                     {res}-2.164818                                                      {txt}{c |}
+     {c BLC}{hline 116}{c BRC}
+
+{com}. 
+. margins, at(sindicato)
+{res}
+{txt}{col 1}Predictive margins{col 58}{lalign 13:Number of obs}{col 71} = {res}{ralign 5:1,198}
+{txt}{col 1}Model VCE: {res:OLS}
+
+{txt}{p2colset 1 13 13 2}{...}
+{p2col:Expression:}{res:Linear prediction, predict()}{p_end}
+{p2colreset}{...}
+{lalign 4:At: }{space 0}{lalign 9:sindicato} = {res:{ralign 8:.1419032}} {txt:(mean)}
+
+{res}{txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 14}{c |}{col 26} Delta-method
+{col 14}{c |}     Margin{col 26}   std. err.{col 38}      t{col 46}   P>|t|{col 54}     [95% con{col 67}f. interval]
+{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 7}_cons {c |}{col 14}{res}{space 2} 6.185309{col 26}{space 2} .0815206{col 37}{space 1}   75.87{col 46}{space 3}0.000{col 54}{space 4} 6.025369{col 67}{space 3} 6.345248
+{txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}{txt}
+{com}. 
+. quietly regress psci ess sindicato, beta
+{txt}
+{com}. outreg2 using output/modelos_tarea2.xls, append ctitle(Model 1) alpha(0.001, 0.01, 0.05)
+{txt}{browse `"output/modelos_tarea2.xls"'}
+{browse `"/Users/macbookair/Documents/Magister UC/1° Semestre 2024/Diseño y Análisis de Investigación Social/tarea2"' :dir}{com} : {txt}{stata `"seeout using "output/modelos_tarea2.txt""':seeout}
+
+{com}. 
+. // Regresion lineal multiple + controles //
+. 
+. regress psci ess sindicato educyrs sexo ib2.ideologia_rec, beta
+
+{txt}      Source {c |}       SS           df       MS      Number of obs   ={res}     1,198
+{txt}{hline 13}{c +}{hline 34}   F(7, 1190)      = {res}     2.27
+{txt}       Model {c |} {res} 126.554736         7  18.0792479   {txt}Prob > F        ={res}    0.0266
+{txt}    Residual {c |} {res}  9462.3067     1,190  7.95151824   {txt}R-squared       ={res}    0.0132
+{txt}{hline 13}{c +}{hline 34}   Adj R-squared   ={res}    0.0074
+{txt}       Total {c |} {res} 9588.86144     1,197  8.01074472   {txt}Root MSE        =   {res} 2.8198
+
+{txt}{hline 20}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 1}               psci{col 21}{c |} Coefficient{col 33}  Std. err.{col 45}      t{col 53}   P>|t|{col 74}        Beta
+{hline 20}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 16}ess {c |}{col 21}{res}{space 2}-.1411152{col 33}{space 2} .0563095{col 44}{space 1}   -2.51{col 53}{space 3}0.012{col 74}{space 3}-.0795316
+{txt}{space 10}sindicato {c |}{col 21}{res}{space 2} .2838223{col 33}{space 2} .2368673{col 44}{space 1}    1.20{col 53}{space 3}0.231{col 74}{space 3} .0350071
+{txt}{space 12}educyrs {c |}{col 21}{res}{space 2}-.0154658{col 33}{space 2} .0204972{col 44}{space 1}   -0.75{col 53}{space 3}0.451{col 74}{space 3}-.0240156
+{txt}{space 15}sexo {c |}{col 21}{res}{space 2} .3361952{col 33}{space 2}  .165335{col 44}{space 1}    2.03{col 53}{space 3}0.042{col 74}{space 3} .0591834
+{txt}{space 19} {c |}
+{space 6}ideologia_rec {c |}
+{space 12}Centro  {c |}{col 21}{res}{space 2}-.1578863{col 33}{space 2} .2853788{col 44}{space 1}   -0.55{col 53}{space 3}0.580{col 74}{space 3}-.0213765
+{txt}{space 9}Izquierda  {c |}{col 21}{res}{space 2} .2537704{col 33}{space 2}   .31551{col 44}{space 1}    0.80{col 53}{space 3}0.421{col 74}{space 3} .0290819
+{txt}Sin identificación  {c |}{col 21}{res}{space 2}-.0945871{col 33}{space 2} .2366735{col 44}{space 1}   -0.40{col 53}{space 3}0.689{col 74}{space 3}-.0166459
+{txt}{space 19} {c |}
+{space 14}_cons {c |}{col 21}{res}{space 2} 6.757563{col 33}{space 2} .3558399{col 44}{space 1}   18.99{col 53}{space 3}0.000{col 74}{space 3}        .
+{txt}{hline 20}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}{txt}
+{com}. 
+. listcoef
+
+{txt}regress (N={res}1198{txt}): Unstandardized and Standardized Estimates 
+
+ Observed SD: {res}2.8303259
+{txt} SD of Error: {res}2.8198437
+
+{txt}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c TT}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}
+        psci {c |}      b         t     P>|t|    bStdX    bStdY   bStdXY      SDofX
+{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c +}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}
+         ess{col 14}{c |}{res}  -0.14112   -2.506   0.012  -0.2251  -0.0499  -0.0795     1.5952
+   {txt}sindicato{col 14}{c |}{res}   0.28382    1.198   0.231   0.0991   0.1003   0.0350     0.3491
+     {txt}educyrs{col 14}{c |}{res}  -0.01547   -0.755   0.451  -0.0680  -0.0055  -0.0240     4.3950
+        {txt}sexo{col 14}{c |}{res}   0.33620    2.033   0.042   0.1675   0.1188   0.0592     0.4982
+{txt}1.ideologi~c{col 14}{c |}{res}  -0.15789   -0.553   0.580  -0.0605  -0.0558  -0.0214     0.3832
+{txt}3.ideologi~c{col 14}{c |}{res}   0.25377    0.804   0.421   0.0823   0.0897   0.0291     0.3244
+{txt}4.ideologi~c{col 14}{c |}{res}  -0.09459   -0.400   0.689  -0.0471  -0.0334  -0.0166     0.4981
+{txt}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c BT}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}{c -}
+
+{com}. 
+. predict predm2_psci
+{txt}(option {bf:xb} assumed; fitted values)
+
+{com}. list in 1/6
+
+     {txt}{c TLC}{hline 9}{c TT}{hline 10}{c TT}{hline 6}{c TT}{hline 5}{c TT}{hline 20}{c TT}{hline 6}{c TT}{hline 20}{c TT}{hline 10}{c TT}{hline 11}{c TT}{hline 10}{c TRC}
+  1. {c |} educyrs {c |} sindic~o {c |} sexo {c |} ess {c |}          ideologia {c |} psci {c |}      ideologia_rec {c |} predm0~i {c |} residuom0 {c |} predm1~i {c |}
+     {c |} {res}     12 {txt}{c |} {res}       0 {txt}{c |} {res}   0 {txt}{c |} {res}  5 {txt}{c |} {res}           Derecha {txt}{c |} {res}   8 {txt}{c |} {res}           Derecha {txt}{c |} {res}6.048054 {txt}{c |} {res} 1.951946 {txt}{c |} {res}6.014238 {txt}{c |}
+     {c LT}{hline 9}{c BT}{hline 10}{c BT}{hline 6}{c BT}{hline 5}{c BT}{hline 20}{c BT}{hline 3}{c TT}{hline 2}{c BT}{hline 20}{c BT}{hline 10}{c BT}{hline 11}{c BT}{hline 10}{c RT}
+     {c |}                        residuom1                         {c |}                        predm2~i                         {c |}
+     {c |}                        {res} 1.985762                         {txt}{c |}                        {res}5.866397                         {txt}{c |}
+     {c BLC}{hline 58}{c BT}{hline 57}{c BRC}
+
+     {c TLC}{hline 9}{c TT}{hline 10}{c TT}{hline 6}{c TT}{hline 5}{c TT}{hline 20}{c TT}{hline 6}{c TT}{hline 20}{c TT}{hline 10}{c TT}{hline 11}{c TT}{hline 10}{c TRC}
+  2. {c |} educyrs {c |} sindic~o {c |} sexo {c |} ess {c |}          ideologia {c |} psci {c |}      ideologia_rec {c |} predm0~i {c |} residuom0 {c |} predm1~i {c |}
+     {c |} {res}     13 {txt}{c |} {res}       0 {txt}{c |} {res}   0 {txt}{c |} {res}  5 {txt}{c |} {res}Sin identificación {txt}{c |} {res}   3 {txt}{c |} {res}Sin identificación {txt}{c |} {res}6.048054 {txt}{c |} {res}-3.048054 {txt}{c |} {res}6.014238 {txt}{c |}
+     {c LT}{hline 9}{c BT}{hline 10}{c BT}{hline 6}{c BT}{hline 5}{c BT}{hline 20}{c BT}{hline 3}{c TT}{hline 2}{c BT}{hline 20}{c BT}{hline 10}{c BT}{hline 11}{c BT}{hline 10}{c RT}
+     {c |}                        residuom1                         {c |}                        predm2~i                         {c |}
+     {c |}                        {res}-3.014238                         {txt}{c |}                        {res}5.756344                         {txt}{c |}
+     {c BLC}{hline 58}{c BT}{hline 57}{c BRC}
+
+     {c TLC}{hline 9}{c TT}{hline 10}{c TT}{hline 6}{c TT}{hline 5}{c TT}{hline 20}{c TT}{hline 6}{c TT}{hline 20}{c TT}{hline 10}{c TT}{hline 11}{c TT}{hline 10}{c TRC}
+  3. {c |} educyrs {c |} sindic~o {c |} sexo {c |} ess {c |}          ideologia {c |} psci {c |}      ideologia_rec {c |} predm0~i {c |} residuom0 {c |} predm1~i {c |}
+     {c |} {res}      7 {txt}{c |} {res}       0 {txt}{c |} {res}   0 {txt}{c |} {res}  5 {txt}{c |} {res}         Izquierda {txt}{c |} {res}  11 {txt}{c |} {res}         Izquierda {txt}{c |} {res}6.048054 {txt}{c |} {res} 4.951946 {txt}{c |} {res}6.014238 {txt}{c |}
+     {c LT}{hline 9}{c BT}{hline 10}{c BT}{hline 6}{c BT}{hline 5}{c BT}{hline 20}{c BT}{hline 3}{c TT}{hline 2}{c BT}{hline 20}{c BT}{hline 10}{c BT}{hline 11}{c BT}{hline 10}{c RT}
+     {c |}                        residuom1                         {c |}                        predm2~i                         {c |}
+     {c |}                        {res} 4.985762                         {txt}{c |}                        {res}6.197497                         {txt}{c |}
+     {c BLC}{hline 58}{c BT}{hline 57}{c BRC}
+
+     {c TLC}{hline 9}{c TT}{hline 10}{c TT}{hline 6}{c TT}{hline 5}{c TT}{hline 20}{c TT}{hline 6}{c TT}{hline 20}{c TT}{hline 10}{c TT}{hline 11}{c TT}{hline 10}{c TRC}
+  4. {c |} educyrs {c |} sindic~o {c |} sexo {c |} ess {c |}          ideologia {c |} psci {c |}      ideologia_rec {c |} predm0~i {c |} residuom0 {c |} predm1~i {c |}
+     {c |} {res}      6 {txt}{c |} {res}       0 {txt}{c |} {res}   1 {txt}{c |} {res}  6 {txt}{c |} {res}            Centro {txt}{c |} {res}   7 {txt}{c |} {res}            Centro {txt}{c |} {res}5.899247 {txt}{c |} {res} 1.100754 {txt}{c |} {res}5.863659 {txt}{c |}
+     {c LT}{hline 9}{c BT}{hline 10}{c BT}{hline 6}{c BT}{hline 5}{c BT}{hline 20}{c BT}{hline 3}{c TT}{hline 2}{c BT}{hline 20}{c BT}{hline 10}{c BT}{hline 11}{c BT}{hline 10}{c RT}
+     {c |}                        residuom1                         {c |}                        predm2~i                         {c |}
+     {c |}                        {res} 1.136341                         {txt}{c |}                        {res}5.996386                         {txt}{c |}
+     {c BLC}{hline 58}{c BT}{hline 57}{c BRC}
+
+     {c TLC}{hline 9}{c TT}{hline 10}{c TT}{hline 6}{c TT}{hline 5}{c TT}{hline 20}{c TT}{hline 6}{c TT}{hline 20}{c TT}{hline 10}{c TT}{hline 11}{c TT}{hline 10}{c TRC}
+  5. {c |} educyrs {c |} sindic~o {c |} sexo {c |} ess {c |}          ideologia {c |} psci {c |}      ideologia_rec {c |} predm0~i {c |} residuom0 {c |} predm1~i {c |}
+     {c |} {res}     13 {txt}{c |} {res}       0 {txt}{c |} {res}   1 {txt}{c |} {res}  6 {txt}{c |} {res}            Centro {txt}{c |} {res}   9 {txt}{c |} {res}            Centro {txt}{c |} {res}5.899247 {txt}{c |} {res} 3.100754 {txt}{c |} {res}5.863659 {txt}{c |}
+     {c LT}{hline 9}{c BT}{hline 10}{c BT}{hline 6}{c BT}{hline 5}{c BT}{hline 20}{c BT}{hline 3}{c TT}{hline 2}{c BT}{hline 20}{c BT}{hline 10}{c BT}{hline 11}{c BT}{hline 10}{c RT}
+     {c |}                        residuom1                         {c |}                        predm2~i                         {c |}
+     {c |}                        {res} 3.136341                         {txt}{c |}                        {res}5.888125                         {txt}{c |}
+     {c BLC}{hline 58}{c BT}{hline 57}{c BRC}
+
+     {c TLC}{hline 9}{c TT}{hline 10}{c TT}{hline 6}{c TT}{hline 5}{c TT}{hline 20}{c TT}{hline 6}{c TT}{hline 20}{c TT}{hline 10}{c TT}{hline 11}{c TT}{hline 10}{c TRC}
+  6. {c |} educyrs {c |} sindic~o {c |} sexo {c |} ess {c |}          ideologia {c |} psci {c |}      ideologia_rec {c |} predm0~i {c |} residuom0 {c |} predm1~i {c |}
+     {c |} {res}     13 {txt}{c |} {res}       0 {txt}{c |} {res}   0 {txt}{c |} {res}  4 {txt}{c |} {res}            Centro {txt}{c |} {res}   4 {txt}{c |} {res}            Centro {txt}{c |} {res}6.196861 {txt}{c |} {res}-2.196861 {txt}{c |} {res}6.164817 {txt}{c |}
+     {c LT}{hline 9}{c BT}{hline 10}{c BT}{hline 6}{c BT}{hline 5}{c BT}{hline 20}{c BT}{hline 3}{c TT}{hline 2}{c BT}{hline 20}{c BT}{hline 10}{c BT}{hline 11}{c BT}{hline 10}{c RT}
+     {c |}                        residuom1                         {c |}                        predm2~i                         {c |}
+     {c |}                        {res}-2.164818                         {txt}{c |}                        {res} 5.83416                         {txt}{c |}
+     {c BLC}{hline 58}{c BT}{hline 57}{c BRC}
+
+{com}. 
+. predict residuom2, residuals 
+{txt}
+{com}. list in 1/6
+
+     {txt}{c TLC}{hline 9}{c TT}{hline 10}{c TT}{hline 6}{c TT}{hline 5}{c TT}{hline 20}{c TT}{hline 6}{c TT}{hline 20}{c TT}{hline 10}{c TT}{hline 11}{c TT}{hline 10}{c TRC}
+  1. {c |} educyrs {c |} sindic~o {c |} sexo {c |} ess {c |}          ideologia {c |} psci {c |}      ideologia_rec {c |} predm0~i {c |} residuom0 {c |} predm1~i {c |}
+     {c |} {res}     12 {txt}{c |} {res}       0 {txt}{c |} {res}   0 {txt}{c |} {res}  5 {txt}{c |} {res}           Derecha {txt}{c |} {res}   8 {txt}{c |} {res}           Derecha {txt}{c |} {res}6.048054 {txt}{c |} {res} 1.951946 {txt}{c |} {res}6.014238 {txt}{c |}
+     {c LT}{hline 9}{c BT}{hline 10}{c BT}{hline 6}{c BT}{hline 5}{c BT}{hline 4}{c TT}{hline 15}{c BT}{hline 6}{c BT}{hline 14}{c TT}{hline 5}{c BT}{hline 10}{c BT}{hline 11}{c BT}{hline 10}{c RT}
+     {c |}              residuom1               {c |}              predm2~i               {c |}               residuom2               {c |}
+     {c |}              {res} 1.985762               {txt}{c |}              {res}5.866397               {txt}{c |}               {res} 2.133603               {txt}{c |}
+     {c BLC}{hline 38}{c BT}{hline 37}{c BT}{hline 39}{c BRC}
+
+     {c TLC}{hline 9}{c TT}{hline 10}{c TT}{hline 6}{c TT}{hline 5}{c TT}{hline 20}{c TT}{hline 6}{c TT}{hline 20}{c TT}{hline 10}{c TT}{hline 11}{c TT}{hline 10}{c TRC}
+  2. {c |} educyrs {c |} sindic~o {c |} sexo {c |} ess {c |}          ideologia {c |} psci {c |}      ideologia_rec {c |} predm0~i {c |} residuom0 {c |} predm1~i {c |}
+     {c |} {res}     13 {txt}{c |} {res}       0 {txt}{c |} {res}   0 {txt}{c |} {res}  5 {txt}{c |} {res}Sin identificación {txt}{c |} {res}   3 {txt}{c |} {res}Sin identificación {txt}{c |} {res}6.048054 {txt}{c |} {res}-3.048054 {txt}{c |} {res}6.014238 {txt}{c |}
+     {c LT}{hline 9}{c BT}{hline 10}{c BT}{hline 6}{c BT}{hline 5}{c BT}{hline 4}{c TT}{hline 15}{c BT}{hline 6}{c BT}{hline 14}{c TT}{hline 5}{c BT}{hline 10}{c BT}{hline 11}{c BT}{hline 10}{c RT}
+     {c |}              residuom1               {c |}              predm2~i               {c |}               residuom2               {c |}
+     {c |}              {res}-3.014238               {txt}{c |}              {res}5.756344               {txt}{c |}               {res}-2.756344               {txt}{c |}
+     {c BLC}{hline 38}{c BT}{hline 37}{c BT}{hline 39}{c BRC}
+
+     {c TLC}{hline 9}{c TT}{hline 10}{c TT}{hline 6}{c TT}{hline 5}{c TT}{hline 20}{c TT}{hline 6}{c TT}{hline 20}{c TT}{hline 10}{c TT}{hline 11}{c TT}{hline 10}{c TRC}
+  3. {c |} educyrs {c |} sindic~o {c |} sexo {c |} ess {c |}          ideologia {c |} psci {c |}      ideologia_rec {c |} predm0~i {c |} residuom0 {c |} predm1~i {c |}
+     {c |} {res}      7 {txt}{c |} {res}       0 {txt}{c |} {res}   0 {txt}{c |} {res}  5 {txt}{c |} {res}         Izquierda {txt}{c |} {res}  11 {txt}{c |} {res}         Izquierda {txt}{c |} {res}6.048054 {txt}{c |} {res} 4.951946 {txt}{c |} {res}6.014238 {txt}{c |}
+     {c LT}{hline 9}{c BT}{hline 10}{c BT}{hline 6}{c BT}{hline 5}{c BT}{hline 4}{c TT}{hline 15}{c BT}{hline 6}{c BT}{hline 14}{c TT}{hline 5}{c BT}{hline 10}{c BT}{hline 11}{c BT}{hline 10}{c RT}
+     {c |}              residuom1               {c |}              predm2~i               {c |}               residuom2               {c |}
+     {c |}              {res} 4.985762               {txt}{c |}              {res}6.197497               {txt}{c |}               {res} 4.802503               {txt}{c |}
+     {c BLC}{hline 38}{c BT}{hline 37}{c BT}{hline 39}{c BRC}
+
+     {c TLC}{hline 9}{c TT}{hline 10}{c TT}{hline 6}{c TT}{hline 5}{c TT}{hline 20}{c TT}{hline 6}{c TT}{hline 20}{c TT}{hline 10}{c TT}{hline 11}{c TT}{hline 10}{c TRC}
+  4. {c |} educyrs {c |} sindic~o {c |} sexo {c |} ess {c |}          ideologia {c |} psci {c |}      ideologia_rec {c |} predm0~i {c |} residuom0 {c |} predm1~i {c |}
+     {c |} {res}      6 {txt}{c |} {res}       0 {txt}{c |} {res}   1 {txt}{c |} {res}  6 {txt}{c |} {res}            Centro {txt}{c |} {res}   7 {txt}{c |} {res}            Centro {txt}{c |} {res}5.899247 {txt}{c |} {res} 1.100754 {txt}{c |} {res}5.863659 {txt}{c |}
+     {c LT}{hline 9}{c BT}{hline 10}{c BT}{hline 6}{c BT}{hline 5}{c BT}{hline 4}{c TT}{hline 15}{c BT}{hline 6}{c BT}{hline 14}{c TT}{hline 5}{c BT}{hline 10}{c BT}{hline 11}{c BT}{hline 10}{c RT}
+     {c |}              residuom1               {c |}              predm2~i               {c |}               residuom2               {c |}
+     {c |}              {res} 1.136341               {txt}{c |}              {res}5.996386               {txt}{c |}               {res} 1.003614               {txt}{c |}
+     {c BLC}{hline 38}{c BT}{hline 37}{c BT}{hline 39}{c BRC}
+
+     {c TLC}{hline 9}{c TT}{hline 10}{c TT}{hline 6}{c TT}{hline 5}{c TT}{hline 20}{c TT}{hline 6}{c TT}{hline 20}{c TT}{hline 10}{c TT}{hline 11}{c TT}{hline 10}{c TRC}
+  5. {c |} educyrs {c |} sindic~o {c |} sexo {c |} ess {c |}          ideologia {c |} psci {c |}      ideologia_rec {c |} predm0~i {c |} residuom0 {c |} predm1~i {c |}
+     {c |} {res}     13 {txt}{c |} {res}       0 {txt}{c |} {res}   1 {txt}{c |} {res}  6 {txt}{c |} {res}            Centro {txt}{c |} {res}   9 {txt}{c |} {res}            Centro {txt}{c |} {res}5.899247 {txt}{c |} {res} 3.100754 {txt}{c |} {res}5.863659 {txt}{c |}
+     {c LT}{hline 9}{c BT}{hline 10}{c BT}{hline 6}{c BT}{hline 5}{c BT}{hline 4}{c TT}{hline 15}{c BT}{hline 6}{c BT}{hline 14}{c TT}{hline 5}{c BT}{hline 10}{c BT}{hline 11}{c BT}{hline 10}{c RT}
+     {c |}              residuom1               {c |}              predm2~i               {c |}               residuom2               {c |}
+     {c |}              {res} 3.136341               {txt}{c |}              {res}5.888125               {txt}{c |}               {res} 3.111875               {txt}{c |}
+     {c BLC}{hline 38}{c BT}{hline 37}{c BT}{hline 39}{c BRC}
+
+     {c TLC}{hline 9}{c TT}{hline 10}{c TT}{hline 6}{c TT}{hline 5}{c TT}{hline 20}{c TT}{hline 6}{c TT}{hline 20}{c TT}{hline 10}{c TT}{hline 11}{c TT}{hline 10}{c TRC}
+  6. {c |} educyrs {c |} sindic~o {c |} sexo {c |} ess {c |}          ideologia {c |} psci {c |}      ideologia_rec {c |} predm0~i {c |} residuom0 {c |} predm1~i {c |}
+     {c |} {res}     13 {txt}{c |} {res}       0 {txt}{c |} {res}   0 {txt}{c |} {res}  4 {txt}{c |} {res}            Centro {txt}{c |} {res}   4 {txt}{c |} {res}            Centro {txt}{c |} {res}6.196861 {txt}{c |} {res}-2.196861 {txt}{c |} {res}6.164817 {txt}{c |}
+     {c LT}{hline 9}{c BT}{hline 10}{c BT}{hline 6}{c BT}{hline 5}{c BT}{hline 4}{c TT}{hline 15}{c BT}{hline 6}{c BT}{hline 14}{c TT}{hline 5}{c BT}{hline 10}{c BT}{hline 11}{c BT}{hline 10}{c RT}
+     {c |}              residuom1               {c |}              predm2~i               {c |}               residuom2               {c |}
+     {c |}              {res}-2.164818               {txt}{c |}              {res} 5.83416               {txt}{c |}               {res} -1.83416               {txt}{c |}
+     {c BLC}{hline 38}{c BT}{hline 37}{c BT}{hline 39}{c BRC}
+
+{com}. 
+. quietly regress psci ess sindicato educyrs sexo ib2.ideologia_rec, beta
+{txt}
+{com}. outreg2 using output/modelos_tarea2.xls, append ctitle(Model 2) alpha(0.001, 0.01, 0.05)
+{txt}{browse `"output/modelos_tarea2.xls"'}
+{browse `"/Users/macbookair/Documents/Magister UC/1° Semestre 2024/Diseño y Análisis de Investigación Social/tarea2"' :dir}{com} : {txt}{stata `"seeout using "output/modelos_tarea2.txt""':seeout}
+
+{com}. 
+. ttest ess, by(sexo) 
+
+{txt}Two-sample t test with equal variances
+{hline 9}{c TT}{hline 68}
+   Group{col 10}{c |}{col 16}Obs{col 27}Mean{col 35}Std. err.{col 47}Std. dev.{col 59}[95% conf. interval]
+{hline 9}{c +}{hline 68}
+       0 {c |}{res}{col 12}    546{col 22} 4.038462{col 34} .0708612{col 46} 1.655789{col 58} 3.899267{col 70} 4.177656
+       {txt}1 {c |}{res}{col 12}    652{col 22} 4.110429{col 34} .0604308{col 46} 1.543058{col 58} 3.991767{col 70} 4.229092
+{txt}{hline 9}{c +}{hline 68}
+Combined {c |}{res}{col 12}  1,198{col 22} 4.077629{col 34} .0460865{col 46} 1.595153{col 58}  3.98721{col 70} 4.168049
+{txt}{hline 9}{c +}{hline 68}
+    diff {c |}{res}{col 22}-.0719679{col 34} .0925512{col 58}-.2535488{col 70} .1096129
+{txt}{hline 9}{c BT}{hline 68}
+    diff = mean({res}0{txt}) - mean({res}1{txt})                                      t = {res} -0.7776
+{txt}H0: diff = 0                                     Degrees of freedom = {res}    1196
+
+    {txt}Ha: diff < 0                 Ha: diff != 0                 Ha: diff > 0
+ Pr(T < t) = {res}0.2185         {txt}Pr(|T| > |t|) = {res}0.4370          {txt}Pr(T > t) = {res}0.7815
+{txt}
+{com}. 
+. test _b[ess]=0
+
+{p 0 7}{space 1}{text:( 1)}{space 1} {res}ess = 0{p_end}
+
+{txt}       F(  1,  1190) ={res}    6.28
+{txt}{col 13}Prob > F ={res}    0.0123
+{txt}
+{com}. 
+. *------------------------------------------------------------------------------- 
+. * Cerrar sesión y guardar nuestros resultados 
+. *-------------------------------------------------------------------------------        
+. * Cerramos el Log File
+. log close
+      {txt}name:  {res}<unnamed>
+       {txt}log:  {res}/Users/macbookair/Documents/Magister UC/1° Semestre 2024/Diseño y Análisis de Investigación Social/tarea2/respaldo.smcl
+  {txt}log type:  {res}smcl
+ {txt}closed on:  {res}22 May 2024, 01:08:29
+{txt}{.-}
+{smcl}
+{txt}{sf}{ul off}

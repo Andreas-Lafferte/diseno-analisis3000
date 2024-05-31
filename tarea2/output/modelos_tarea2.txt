@@ -1,0 +1,24 @@
+	(1)	(2)	(3)
+VARIABLES	Model 0	Model 1	Model 2
+			
+ess	-0.149**	-0.151**	-0.141*
+	(0.0511)	(0.0512)	(0.0563)
+sindicato		0.227	0.284
+		(0.234)	(0.237)
+educyrs			-0.0155
+			(0.0205)
+sexo			0.336*
+			(0.165)
+1.ideologia_rec			-0.158
+			(0.285)
+3.ideologia_rec			0.254
+			(0.316)
+4.ideologia_rec			-0.0946
+			(0.237)
+Constant	6.792***	6.767***	6.758***
+	(0.224)	(0.225)	(0.356)
+			
+Observations	1,198	1,198	1,198
+R-squared	0.007	0.008	0.013
+Standard errors in parentheses			
+*** p<0.001, ** p<0.01, * p<0.05			
